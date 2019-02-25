@@ -1,0 +1,46 @@
+manifest.json 相當於package.json,描述這個extenison的種種資訊
+當source檔更新時,不需要reload
+
+設定icon
+"icons": {
+    "128": "icon128.png",
+    "48": "icon48.png",
+    "16": "icon16.png"
+  },
+
+
+
+"browser_action": {
+    "default_popup": "popup.html" // 點擊icon會出現的小頁面
+  }
+
+
+"page_action": {
+    "default_icon": "icon16.png",
+    "default_popup": "popup.html",
+    "default_title": "PageFontStyle"
+},
+
+
+啟用一些功能
+"permissions": [
+    "storage", // 儲存
+    "notifications", // 系統提示
+    "contextMenu" // 右鍵選單
+    "tabs"
+]
+
+背景執行的程式
+"background": {
+  "scripts": ["eventPage.js"] // 要執行的js
+  "persistent": false // event page, 只有特定事件觸發才會執行
+  "persistent": true // background page, 隨時都在執行
+}
+
+
+設定content scripts(無法使用大部份chrome api, 但可修改dom)
+"content_scripts": [{
+    "matchs": ["https://developer.chrome.com/*"], // content scripts要生效的網頁
+    "js": ["content.js", "jquery-3.3.1.min.js"] // 要加入的content scripts
+    "css": ["content.css"] // 要加入的css,會套用到目標的網頁上
+  }],
